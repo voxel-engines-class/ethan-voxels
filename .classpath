@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="/voxels_initial_setup/src"/>
+	<classpathentry excluding="assets_for_voxel/MatDefs/|assets_for_voxel/Textures/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/assets_for_voxel/MatDefs"/>
+	<classpathentry kind="src" path="src/assets_for_voxel/Textures"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/google-guava"/>
+	<classpathentry kind="lib" path="src/lib/eventbus.jar"/>
+	<classpathentry kind="lib" path="src/lib/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="src/lib/j-ogg-oggd.jar"/>
+	<classpathentry kind="lib" path="src/lib/j-ogg-vorbisd.jar"/>
+	<classpathentry kind="lib" path="src/lib/jbullet.jar"/>
+	<classpathentry kind="lib" path="src/lib/jglfont-core.jar"/>
+	<classpathentry kind="lib" path="src/lib/jinput.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-blender.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-core.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-desktop.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-effects.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-jbullet.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-jogg.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-lwjgl.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-networking.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-niftygui.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-openal-soft-natives-android.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-plugins.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-terrain.jar"/>
+	<classpathentry kind="lib" path="src/lib/jME3-testdata.jar"/>
+	<classpathentry kind="lib" path="src/lib/joal.jar"/>
+	<classpathentry kind="lib" path="src/lib/jogl-all.jar"/>
+	<classpathentry kind="lib" path="src/lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="src/lib/nifty-default-controls.jar"/>
+	<classpathentry kind="lib" path="src/lib/nifty-examples.jar"/>
+	<classpathentry kind="lib" path="src/lib/nifty-style-black.jar"/>
+	<classpathentry kind="lib" path="src/lib/nifty.jar"/>
+	<classpathentry kind="lib" path="src/lib/stack-alloc.jar"/>
+	<classpathentry kind="lib" path="src/lib/vecmath.jar"/>
+	<classpathentry kind="lib" path="src/lib/xmlpull-xpp3.jar"/>
+	<classpathentry kind="lib" path="src/google-guava/guava-16.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
