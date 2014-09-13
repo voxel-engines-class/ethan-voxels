@@ -13,12 +13,12 @@ import com.jme3.scene.shape.Cylinder;
 
 /**
  * Created by didyouloseyourdog on 8/10/14.
- * this is a file change!
+ * this is a file change! see?
  */
 public class VoxelWorld extends SimpleApplication
 {
     MaterialLibrarian materialLibrarian;
-    int fakeUnused = 4;
+    int fakeUnused = 4; //comments
 
     @Override
     public void simpleUpdate(float secondsPerFrame) {}
