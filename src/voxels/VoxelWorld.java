@@ -13,16 +13,19 @@ import com.jme3.scene.shape.Cylinder;
 
 /**
  * Created by didyouloseyourdog on 8/10/14.
+ * this is a file change!
  */
 public class VoxelWorld extends SimpleApplication
 {
     MaterialLibrarian materialLibrarian;
+    int fakeUnused = 4;
 
     @Override
     public void simpleUpdate(float secondsPerFrame) {}
 
     @Override
     public void simpleInitApp() {
+    	fakeUnused = 5;
         materialLibrarian = new MaterialLibrarian(assetManager);
         setUpTheCam();
         makeADemoMeshAndAdditToTheRootNode();
@@ -60,6 +63,7 @@ public class VoxelWorld extends SimpleApplication
 	}
     
     private void setUpTheCam() {
+    	fakeUnused +=3;
         flyCam.setMoveSpeed(30);
     }
 
