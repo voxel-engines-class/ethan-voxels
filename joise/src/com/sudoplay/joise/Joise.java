@@ -67,7 +67,7 @@ public class Joise {
    * Creates a new instance of Joise with the supplied module chain.
    * <p>
    * This method duplicates the module chain by first converting the chain to a
-   * {@link ModuleMap}, then converting it back to a {@link com.sudoplay.joise.module.Module} while
+   * {@link ModuleMap}, then converting it back to a {@link Module} while
    * mapping any seed names to the seedmap.
    * <p>
    * Changes made to the original module passed in will not be reflected in this
@@ -85,7 +85,7 @@ public class Joise {
    * Creates a new instance of Joise from the supplied {@link ModuleMap}.
    * <p>
    * This method duplicates the module map by first converting the map to a
-   * {@link com.sudoplay.joise.module.Module}, then converting it back to a module map. Seed names are
+   * {@link Module}, then converting it back to a module map. Seed names are
    * mapped during the conversion from map to module.
    * <p>
    * Changes made to the original module map passed in will not be reflected in

@@ -161,7 +161,7 @@ public class Noise {
     };
 
     public double calculate(double x, double y, double z, int ix, int iy,
-                            int iz, long seed);
+        int iz, long seed);
   }
 
   private static interface WorkerNoise4 {
@@ -191,7 +191,7 @@ public class Noise {
     };
 
     public double calculate(double x, double y, double z, double w, int ix,
-                            int iy, int iz, int iw, long seed);
+        int iy, int iz, int iw, long seed);
   }
 
   private static interface WorkerNoise6 {
@@ -226,7 +226,7 @@ public class Noise {
     };
 
     public double calculate(double x, double y, double z, double w, double u,
-                            double v, int ix, int iy, int iz, int iw, int iu, int iv, long seed);
+        double v, int ix, int iy, int iz, int iw, int iu, int iv, long seed);
   }
 
   // ==========================================================================
@@ -823,7 +823,7 @@ public class Noise {
     };
 
     public double get(double x, double y, double z, long seed,
-                      Interpolator interpolator);
+        Interpolator interpolator);
   }
 
   // ==========================================================================
@@ -1020,7 +1020,7 @@ public class Noise {
     };
 
     public double get(double x, double y, double z, double w, long seed,
-                      Interpolator interpolator);
+        Interpolator interpolator);
   }
 
   // ==========================================================================
@@ -1190,7 +1190,7 @@ public class Noise {
     };
 
     public double get(double x, double y, double z, double w, double u,
-                      double v, long seed, Interpolator interpolator);
+        double v, long seed, Interpolator interpolator);
   }
 
   // ==========================================================================
