@@ -71,8 +71,12 @@ public class VoxelWorld extends SimpleApplication
     
     private void makeSomeChunks() {
     	 Coord3 chunkCoord = new Coord3(0,0,0); // arbitrary chunk coord
+    	 // don't give coords that are outside of the world. OK? thanks.
+    	 
          Chunk chunk = map.createOrLookupChunkAt(chunkCoord);
-         chunk.chunkBrain.meshDirty = true; // THIS IS STEP 4 OF 'PHASE 2.1'
+         
+         chunk.chunkBrain.meshDirty = true; // THIS IS STEP 4 OF 'PHASE 2 .1'
+         //Asserter.assertTrue(chunk != null, "ahhhhhhh... why did we get a null chunk. ay aya ya ayayay");
          rootNode.attachChild(chunk.chunkBrain.getGeometry()); // THIS IS STEP 5 
          // TODO: implement chunk brain class and its getGeometry() method (see below in th
     }

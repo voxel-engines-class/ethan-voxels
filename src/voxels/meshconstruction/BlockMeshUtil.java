@@ -123,9 +123,9 @@ public class BlockMeshUtil {
 
     private static void IndicesForDirection(MeshSet mset, int triIndexStart) {
     	for (int index = 0; index < FaceIndices.length; index++) {
-    		int i = FaceIndices[index];
+    		int i = FaceIndices[index]; 
     		mset.indices.add(i + triIndexStart);
-    	}
+    	} 
     }
     
     

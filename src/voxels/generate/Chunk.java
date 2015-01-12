@@ -12,10 +12,11 @@ public class Chunk {
    public static final int ZLENGTH = 16;
    public final ChunkBrain chunkBrain;
    public final Coord3 position;
+
    
    public Chunk(Coord3 chunkCo, TerrainMap terrainMap) {
 	// TODO Auto-generated constructor stub
-	  chunkBrain = new ChunkBrain(null);
+	  chunkBrain = new ChunkBrain(this);
 	  position = chunkCo;
 	  
    }
@@ -38,12 +39,12 @@ public class Chunk {
        return new Coord3(chunkX, chunkY, chunkZ);
    }
    public static Coord3 ToChunkLocalCoord(Coord3 woco) {
-       return ToChunkLocalCoord(woco.x, woco.y, woco.z);
+      return ToChunkLocalCoord(woco.x, woco.y, woco.z);
    }
    public static Coord3 ToChunkLocalCoord(int x, int y, int z) {
        // TRICKY FOR NEGATIVE NUMBERS!
        // FOR NOW, USE MOD TO MAKE A SOLUTION THAT 
-       // WORKS FOR POSITIVE NUMBERS
+       // WORKS FOR POSITIVE NUMBERS :( :( ;-; D::D:D:D:D:D:D:::DD::DD:DD:DD:DD:DD:::DD:DD:DD:::D::D:DD::DD:DDD::D:D:D
        int xlocal = x % XLENGTH;
        int ylocal = y % YLENGTH;
        int zlocal = z % ZLENGTH;
@@ -64,7 +65,7 @@ public class Chunk {
    }
    public static Coord3 ToWorldPosition(Coord3 chunkPosition, Coord3 localPosition) {
        /*
-        * Opposite of ToChunkPoschunkcuhunkposititititititition
+        * Opposite of ToChunkP1oschunkcuhunkposititititititition
         */
        int worldX = chunkPosition.x*16+localPosition.x;
        int worldY =chunkPosition.y*16+localPosition.y;
