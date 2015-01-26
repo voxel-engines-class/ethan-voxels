@@ -80,6 +80,9 @@ public class VoxelWorld extends SimpleApplication
     	 Coord3 chunkCoord = new Coord3(0,0,0); // arbitrary chunk coord
     	 // don't give coords that are outside of the world. OK? thanks.
     	 
+    	 
+    	 
+    	 
          Chunk chunk = map.createOrLookupChunkAt(chunkCoord);
          
          chunk.chunkBrain.meshDirty = true; // THIS IS STEP 4 OF 'PHASE 2 .1'
