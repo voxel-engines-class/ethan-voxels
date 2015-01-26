@@ -20,9 +20,7 @@ public class TerrainDataProvider {
     }
  
     public int getBlockDataAtPosition(int xin, int yin, int zin) {
-    	if (xin % 2 == 0) {
-    		return BlockType.GRASS.ordinal();
-    	}
+    	if ((xin + yin + zin ) < 22 || yin < 2 ) return BlockType.GRASS.ordinal(); // #MEDDLERino
         return BlockType.AIR.ordinal(); // this method is pretty lazy right now.
     }
     

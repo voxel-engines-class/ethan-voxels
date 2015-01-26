@@ -23,30 +23,25 @@ import com.jme3.scene.shape.Cylinder;
 import com.jme3.texture.Texture;
 import com.jme3.util.BufferUtils;
 
-/**
+/* *
 <<<<<<< HEAD
  * Created by didyouloseyourcat on 8/10/14.
+ * =======
+ * Created by didyouloseyourdog on 8/10/14.
+ * this is a file change! see?
  */
+
 public class VoxelWorld extends SimpleApplication
 {
     public static MaterialLibrarian materialLibrarian;
     TerrainMap map;
-=======
- * Created by didyouloseyourdog on 8/10/14.
- * this is a file change! see?
- */
-public class VoxelWorld extends SimpleApplication
-{
-    MaterialLibrarian materialLibrarian;
-    int fakeUnused = 4; //comments
 
->>>>>>> FETCH_HEAD
+  
     @Override
     public void simpleUpdate(float secondsPerFrame) {}
 
     @Override
     public void simpleInitApp() {
-    	fakeUnused = 5;
         materialLibrarian = new MaterialLibrarian(assetManager);
         map = new TerrainMap();
         setUpTheCam();
@@ -143,7 +138,6 @@ public class VoxelWorld extends SimpleApplication
 	}
     
     private void setUpTheCam() {
-    	fakeUnused +=3;
         flyCam.setMoveSpeed(30);
     }
 

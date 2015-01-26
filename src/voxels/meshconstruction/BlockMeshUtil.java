@@ -55,7 +55,18 @@ public class BlockMeshUtil {
                                 //
                
             },
-      
+            //Zpos
+
+            new Vector3f[] {
+                    new Vector3f(0.5f, -0.5f,  -0.5f),
+                    //1
+                    new Vector3f(0.5f,  0.5f,  -0.5f),
+                    //2
+                    new Vector3f(-0.5f,  0.5f,  -0.5f),
+                    new Vector3f(-0.5f, -0.5f,  -0.5f),
+                    //1
+                   
+                },
             
       //Zneg
             new Vector3f[] {
@@ -68,18 +79,7 @@ public class BlockMeshUtil {
                     //1 
                     
                 },
-              //Zpos
-
-        new Vector3f[] {
-                new Vector3f(0.5f, -0.5f,  -0.5f),
-                //1
-                new Vector3f(0.5f,  0.5f,  -0.5f),
-                //2
-                new Vector3f(-0.5f,  0.5f,  -0.5f),
-                new Vector3f(-0.5f, -0.5f,  -0.5f),
-                //1
-               
-            },
+           
               
         
     };
@@ -112,7 +112,7 @@ public class BlockMeshUtil {
        * http://voxel.matthewpoindexter.com/class/block-faces-part-2-1-fixing-the-annoyingly-mis-aligned-texture/
        * FOR THIS TO WORK (WELL). 
        */
-      Vector2f offsetStart = new Vector2f(.25f,.25f);
+      Vector2f offsetStart = new Vector2f(.12f,.36f);
       mset.uvs.addAll(Arrays.asList(
               offsetStart ,
               new Vector2f(offsetStart.x, offsetStart.y +.25f),

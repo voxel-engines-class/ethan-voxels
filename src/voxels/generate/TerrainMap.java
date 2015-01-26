@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 import voxel.maps.BlockType;
 import voxel.maps.Coord3;
-
+//ddid u lose tht cat
 public class TerrainMap {
     
-    //Chunk storage: 14*14*4 is a capacity hint for HashMap (a guess of the size of the visible world in chunks)
+    //Chunk storage: 14*14*4 is a capacity hint for HashMap (a guess of the size of the visible world in chunks)A
+	TerrainDataProvider tdp = new TerrainDataProvider();
     private HashMap<Coord3, Chunk> chunks = new HashMap<Coord3, Chunk>(14 * 14 * 4);
     public static boolean withinWorldBlocks(Coord3 coord){
     	return (!(coord.y < 0 || coord.y > (HEIGHTLIMITCHUNK*Chunk.XLENGTH)));
@@ -25,9 +26,7 @@ public class TerrainMap {
      * return the chunk at chunkCo.
      */
     public Chunk createOrLookupChunkAt(Coord3 chunkCo) {
-        if(chunkCo.y < 0 || chunkCo.y > HEIGHTLIMITCHUNK){
-        	return null;
-        }
+        
         Chunk chunk = chunks.get(chunkCo);
         // if the chunk is null {
         // chunk = a new chunk with this chunk coord and this terrainMap)
@@ -54,12 +53,19 @@ public class TerrainMap {
          * return blockType;
          * 
          */
+    	
     	if(!withinWorldBlocks(global)){
     		return BlockType.YOLOSWAG420.ordinal();
     	}
+    	
     	Chunk chunk = createOrLookupChunkAt(global);
     	//TODO: this method needs some extra logic. leaving it alone temporarily.
-    	return chunk.getBlock(global);
+    	int block = chunk.getBlock(global);
+    	if(BlockType.YOLOSWAG420.ordinal() == block){
+    		block = tdp.getBlockDataAtPosition(global.x, global.y, global.z);
+    		chunk.setBlock(Chunk.ToChunkLocalCoord(global));
+    	}
+    	return block;
     }
 
 //    public byte createOrLookupBlockAt(Coord3 globalCo) {

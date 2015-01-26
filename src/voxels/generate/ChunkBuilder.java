@@ -18,12 +18,10 @@ import voxel.maps.Coord3;
 import voxels.meshconstruction.BlockMeshUtil;
 import voxels.meshconstruction.MeshSet;
 import voxel.maps.Direction;
-public class ChunkBuilder 
-{
+public class ChunkBuilder {
     
-	public static void buildMesh(Chunk chunk, MeshSet mset)
-    {
-    	TerrainMap map = chunk.getMap();
+	public static void buildMesh(Chunk chunk, MeshSet mset) {
+    	TerrainMap map = chunk.map;
     	int triIndexStart = 0;
         // TODO: WRITE THIS METHOD (DO THIS ON PAPER FIRST AND NOT BEFORE WE TALK ABOUT WHAT TO DO).
     	//TODO: Fourloops
@@ -32,7 +30,7 @@ public class ChunkBuilder
     	for(int x = 0; x < Chunk.XLENGTH; x++){
     		for(int y = 0; y < Chunk.YLENGTH; y++){
     			for(int z = 0; z < Chunk.ZLENGTH; z++){
-    				 Coord3 blockGlobal = chGlobal.add(new Coord3(x,y,z));
+    				Coord3 blockGlobal = chGlobal.add(new Coord3(x,y,z));
     				int block = map.createOrLookupBlockAt(blockGlobal); // TODO: fix dat shiz
     				if(!BlockType.IsVisible(block)){ //TECHNICALLY, WE MEAN "IS VISIBLE" TODO: REFACTOR SWOAPY
     					continue;

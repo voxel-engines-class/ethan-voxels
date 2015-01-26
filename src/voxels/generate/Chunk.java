@@ -12,15 +12,15 @@ public class Chunk {
    public static final int ZLENGTH = 16;
    public final ChunkBrain chunkBrain;
    public final Coord3 position;
-
+   public final TerrainMap map;
    
    public Chunk(Coord3 chunkCo, TerrainMap terrainMap) {
 	// TODO Auto-generated constructor stub
 	  chunkBrain = new ChunkBrain(this);
 	  position = chunkCo;
-	  
+	  map = terrainMap;
    }
-/*
+   /*
     * Chunk Position Methods
     * Chunk Positions are always the same as 
     * the position of the first block in the chunk (block at lower, xneg, zneg corner with local pos: (0,0,0))
@@ -52,12 +52,13 @@ public class Chunk {
    }
    
    public int getBlock(Coord3 local){
+	   // ********MEDDLER: CHANGE ZERO TO BlockType.NONEXISTENT.ordinal();
 	return 0;
 	   
    }
    
    public void setBlock(Coord3 local){
-	  
+	  //TODO: save ye blocke!!!!!
    }
    
    public static Coord3 ToWorldPosition(Coord3 chunkPosition) {
@@ -73,13 +74,8 @@ public class Chunk {
        return new Coord3(worldX, worldY, worldZ);
    }
 
-public TerrainMap getMap() {
-	// TODO Auto-generated method stub
-	//return map;
-	return null;         
-}
-
 public int blockAt(Coord3 local){
+	// ********MEDDLER: ERASE THIS WHOLE METHOD: DUPLICATES getBlock()
   return 0;  
 }
 }
