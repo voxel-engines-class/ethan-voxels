@@ -15,8 +15,10 @@ public class TerrainMap {
     }
        // TerrainDataProvider     
     public static final int HEIGHTLIMITCHUNK = 6;
-        public static final int WORLD_HEIGHT_CHUNKS = 4; // you can change this now or later.
- 
+     //   public static final int WORLD_HEIGHT_CHUNKS = 4; // you can change this now or later.
+    public static int worldHeightBlocks(){
+    	return HEIGHTLIMITCHUNK * Chunk.YLENGTH;
+    }
         // TODO: add a method 'worldHeightBlocks()' // return world_height_chunks * Chunk.YLENGTH;
     
     /*			
@@ -38,7 +40,7 @@ public class TerrainMap {
         }
         return chunk; // TODO: actually implement this.
     }
-    public int createOrLookupBlockAt(Coord3 global) {
+    public BlockType createOrLookupBlockAt(Coord3 global) {
         /*
          * If this global is outside of the global boundaries: (make a public static method that checks for this)
          * return BlockType.NON_EXISTANT.ordinal();
@@ -55,13 +57,13 @@ public class TerrainMap {
          */
     	
     	if(!withinWorldBlocks(global)){
-    		return BlockType.YOLOSWAG420.ordinal();
+    		return BlockType.YOLOSWAG420;
     	}
     	
     	Chunk chunk = createOrLookupChunkAt(global);
     	//TODO: this method needs some extra logic. leaving it alone temporarily.
-    	int block = chunk.getBlock(global);
-    	if(BlockType.YOLOSWAG420.ordinal() == block){
+    	BlockType block = chunk.getBlock(global);
+    	if(BlockType.YOLOSWAG420 == block){
     		block = tdp.getBlockDataAtPosition(global.x, global.y, global.z);
     		chunk.setBlock(Chunk.ToChunkLocalCoord(global));
     	}

@@ -6,6 +6,7 @@ import java.util.List;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
+import voxel.maps.BlockType;
 import voxel.maps.Coord3;
 import voxel.maps.Direction;
 
@@ -86,10 +87,10 @@ public class BlockMeshUtil {
 	private static List<Vector2f> uvs = Arrays.asList(new Vector2f(0,0),new Vector2f(0,1),new Vector2f(1,1),new Vector2f(1,0));
 	private static final int[] FaceIndices = new int[] {0,3,2, 0,2,1};
 	
-    public static void AddFaceMeshData(Coord3 pos, MeshSet mset, int direction, int triIndexStart)
+    public static void AddFaceMeshData(Coord3 pos, MeshSet mset, int direction, int triIndexStart, BlockType blockType)
     {
         FaceVertices(mset, pos, direction);
-        UVsForDirection(mset, direction);
+        UVsForDirection(mset, direction,blockType);
         IndicesForDirection(mset, triIndexStart);
     }
     
@@ -103,7 +104,7 @@ public class BlockMeshUtil {
     }*/
    
     /* NEW VERSION OF ABOVE. NOTICE THAT BOTH OLD AND NEW ADD FOUR VECTOR2Fs TO mset.uvs. JUST SLIGHTLY DIFFERENT VECTOR2Fs. */
-    private static void UVsForDirection(MeshSet mset, int dir) {
+    private static void UVsForDirection(MeshSet mset, int dir, BlockType blockType) {
       /*
        * TRY CHANGING THE X AND Y OF OFFSETSTART. X AND Y CAN EACH BE 0f, .25f, .5f, or .75f 
        * TRY ANY OF THE 16 COMBINATIONS: (.25f, .25f) for stone, (0f, .75f) for side grass
@@ -112,7 +113,7 @@ public class BlockMeshUtil {
        * http://voxel.matthewpoindexter.com/class/block-faces-part-2-1-fixing-the-annoyingly-mis-aligned-texture/
        * FOR THIS TO WORK (WELL). 
        */
-      Vector2f offsetStart = new Vector2f(.12f,.36f);
+      Vector2f offsetStart = blockType.texCoords[ dir ];//lockCoordinates(blockType);
       mset.uvs.addAll(Arrays.asList(
               offsetStart ,
               new Vector2f(offsetStart.x, offsetStart.y +.25f),

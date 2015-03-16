@@ -1,5 +1,6 @@
 package voxels.generate;
 
+import voxel.maps.BlockType;
 import voxel.maps.Coord3;
 
 
@@ -51,9 +52,9 @@ public class Chunk {
        return new Coord3(xlocal, ylocal, zlocal);
    }
    
-   public int getBlock(Coord3 local){
+   public BlockType getBlock(Coord3 local){
 	   // ********MEDDLER: CHANGE ZERO TO BlockType.NONEXISTENT.ordinal();
-	return 0;
+	return BlockType.YOLOSWAG420;
 	   
    }
    

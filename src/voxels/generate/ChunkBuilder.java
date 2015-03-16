@@ -31,14 +31,14 @@ public class ChunkBuilder {
     		for(int y = 0; y < Chunk.YLENGTH; y++){
     			for(int z = 0; z < Chunk.ZLENGTH; z++){
     				Coord3 blockGlobal = chGlobal.add(new Coord3(x,y,z));
-    				int block = map.createOrLookupBlockAt(blockGlobal); // TODO: fix dat shiz
+    				BlockType block = map.createOrLookupBlockAt(blockGlobal); // TODO: fix dat shiz
     				if(!BlockType.IsVisible(block)){ //TECHNICALLY, WE MEAN "IS VISIBLE" TODO: REFACTOR SWOAPY
     					continue;
     				}
     	    		for(int dir = 0; dir < Direction.DirectionCoords.length; dir++){
     	    				if (IsFaceVisible(map,blockGlobal,dir)) {
     	    					//TODO: fill in da geometry
-    	    					BlockMeshUtil.AddFaceMeshData(blockGlobal, mset, dir, triIndexStart);
+    	    					BlockMeshUtil.AddFaceMeshData(blockGlobal, mset, dir, triIndexStart,block);
     	    					triIndexStart+=4;
     	    				}
     	    		}
@@ -82,7 +82,7 @@ public class ChunkBuilder {
  
         // YOU'LL NEED THIS METHOD IN BUILDMESH()
     private static boolean IsFaceVisible(TerrainMap terrainMap, Coord3 globalblockCo, int direction) {
-    	int neighborBLOCK = terrainMap.createOrLookupBlockAt(globalblockCo.add(Direction.DirectionCoords[direction]));
+    	BlockType neighborBLOCK = terrainMap.createOrLookupBlockAt(globalblockCo.add(Direction.DirectionCoords[direction]));
     	return (!BlockType.IsVisible(neighborBLOCK)) ;
     		
         // DA LOGIC: 

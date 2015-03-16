@@ -1,5 +1,12 @@
 package voxels;
 
+import java.awt.Color;
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
+
+import voxel.maps.BlockType;
 import voxel.maps.Coord3;
 import voxel.maps.Direction;
 import voxels.generate.Chunk;
@@ -20,8 +27,13 @@ import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.scene.debug.Arrow;
 import com.jme3.scene.shape.Cylinder;
+import com.jme3.system.AppSettings;
+import com.jme3.texture.Image;
 import com.jme3.texture.Texture;
+import com.jme3.texture.Texture2D;
+import com.jme3.texture.plugins.AWTLoader;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.SkyFactory;
 
 /* *
 <<<<<<< HEAD
@@ -42,9 +54,12 @@ public class VoxelWorld extends SimpleApplication
 
     @Override
     public void simpleInitApp() {
+    	
         materialLibrarian = new MaterialLibrarian(assetManager);
         map = new TerrainMap();
+        
         setUpTheCam();
+        setupSkyTexture();
 //        makeADemoMeshAndAdditToTheRootNode();
         makeSomeChunks();
         System.out.println(Chunk.ToChunkPosition(14, 122, 12).y);
@@ -54,12 +69,28 @@ public class VoxelWorld extends SimpleApplication
     /*
      * TEST METHOD. THIS CODE WILL MOVE!!
      */
+    private static void ScreenSettings(VoxelWorld app, boolean fullScreen) {
+        GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        DisplayMode[] modes = device.getDisplayModes();
+        int SCREEN_MODE=0; // note: there are usually several, let's pick the first
+        AppSettings settings = new AppSettings(true);
+        float scale_screen = fullScreen ? 1f : .6f;
+        Vector2f screenDims = new Vector2f((int)(modes[SCREEN_MODE].getWidth() * scale_screen ),(int)(modes[SCREEN_MODE].getHeight() * scale_screen ));
+        settings.setResolution((int)screenDims.x,(int) screenDims.y);
+        settings.setFrequency(modes[SCREEN_MODE].getRefreshRate());
+        settings.setBitsPerPixel(modes[SCREEN_MODE].getBitDepth());
+        if (fullScreen) {
+            settings.setFullscreen(device.isFullScreenSupported());
+        }
+        app.setSettings(settings);
+        app.setShowSettings(false);
+    }
     
     private void addTestBlockFace() {
     	for(int i = 0; i < 6; i++){
         MeshSet mset = new MeshSet(); // 1
         Coord3 pos = new Coord3(0,0,0); // 2
-        BlockMeshUtil.AddFaceMeshData(pos, mset, i, 0); // 3
+        BlockMeshUtil.AddFaceMeshData(pos, mset, i, 0,BlockType.STONE); // 3
         Mesh testMesh = new Mesh(); // 4
         ApplyMeshSet(mset, testMesh); // 5
         Geometry someGeometry = new Geometry("test geom", testMesh); // 6
@@ -77,18 +108,25 @@ public class VoxelWorld extends SimpleApplication
     }
     
     private void makeSomeChunks() {
-    	 Coord3 chunkCoord = new Coord3(0,0,0); // arbitrary chunk coord
-    	 // don't give coords that are outside of the world. OK? thanks.
-    	 
-    	 
-    	 
-    	 
-         Chunk chunk = map.createOrLookupChunkAt(chunkCoord);
+    	for(int x = 0; x < 4; x++){
+    		for(int y = 0; y < map.HEIGHTLIMITCHUNK; y++){
+    		for(int z = 0; z < 4; z++){
+    	 Coord3 chunkCoord = new Coord3(x,0,z); // arbitrary chunk coord
+Chunk chunk = map.createOrLookupChunkAt(chunkCoord);
          
          chunk.chunkBrain.meshDirty = true; // THIS IS STEP 4 OF 'PHASE 2 .1'
          //Asserter.assertTrue(chunk != null, "ahhhhhhh... why did we get a null chunk. ay aya ya ayayay");
          rootNode.attachChild(chunk.chunkBrain.getGeometry()); // THIS IS STEP 5 
          // TODO: implement chunk brain class and its getGeometry() method (see below in th
+    		}
+    		}
+    	}
+    	 // don't give coords that are outside of the world. OK? thanks.
+    	 
+    	 
+    	 
+    	 
+         
     }
     /*
      * TEST METHOD. THIS CODE WILL MOVE!!
@@ -143,12 +181,32 @@ public class VoxelWorld extends SimpleApplication
     private void setUpTheCam() {
         flyCam.setMoveSpeed(30);
     }
+    
+    private void setupSkyTexture() {
+        Texture2D skyTex = TexFromBufferedImage(OnePixelBufferedImage(new Color(.6f,1f,1f,1f)));
+        rootNode.attachChild(SkyFactory.createSky(assetManager, skyTex, true));
+    }
+    private static BufferedImage OnePixelBufferedImage(Color color) {
+        BufferedImage image = new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
+        for (int x = 0 ; x < image.getWidth(); ++x) {
+            for (int y = 0; y < image.getHeight() ; ++y) {
+                image.setRGB(x, y, color.getRGB() );
+            }
+        }
+        return image;
+    }
+    private static Texture2D TexFromBufferedImage(BufferedImage bim) {
+        AWTLoader awtl = new AWTLoader();
+        Image im = awtl.load(bim, false);
+        return new Texture2D(im);
+    }
 
     /*******************************
      * Program starts here... ******
      *******************************/
     public static void main(String[] args) {
         VoxelWorld app = new VoxelWorld();
+        ScreenSettings(app,false);
         app.start(); // start the game
     }
 
