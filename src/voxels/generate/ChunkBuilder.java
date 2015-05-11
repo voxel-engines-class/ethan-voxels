@@ -3,6 +3,7 @@ package voxels.generate;
  
 import static voxels.generate.Chunk.*;
 
+import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.Vector2f;
@@ -38,7 +39,7 @@ public class ChunkBuilder {
     	    		for(int dir = 0; dir < Direction.DirectionCoords.length; dir++){
     	    				if (IsFaceVisible(map,blockGlobal,dir)) {
     	    					//TODO: fill in da geometry
-    	    					BlockMeshUtil.AddFaceMeshData(blockGlobal, mset, dir, triIndexStart,block);
+    	    					BlockMeshUtil.AddFaceMeshData(blockGlobal, mset, dir, triIndexStart,block,map);
     	    					triIndexStart+=4;
     	    				}
     	    		}
@@ -59,7 +60,7 @@ public class ChunkBuilder {
              bigMesh.clearBuffer(Type.TexCoord);
             bigMesh.clearBuffer(Type.Index);
             
-            
+           
             bigMesh.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(mset.vertices.toArray(new Vector3f[0])));
             bigMesh.setBuffer(Type.TexCoord, 2, BufferUtils.createFloatBuffer(mset.uvs.toArray(new Vector2f[0])));
                
@@ -70,6 +71,7 @@ public class ChunkBuilder {
             
         
         bigMesh.clearBuffer(Type.Color);
+        bigMesh.setBuffer(Type.Color, 4, Floats.toArray(mset.colors));
  
  
         bigMesh.setDynamic();

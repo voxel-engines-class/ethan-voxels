@@ -9,6 +9,7 @@ import com.jme3.math.Vector3f;
 import voxel.maps.BlockType;
 import voxel.maps.Coord3;
 import voxel.maps.Direction;
+import voxels.generate.TerrainMap;
 
 public class BlockMeshUtil {
         /*
@@ -33,7 +34,7 @@ public class BlockMeshUtil {
         },
       //Yneg
         new Vector3f[] {
-        		//
+     
                 new Vector3f(0.5f,  -0.5f,  0.5f),
                 //
                 new Vector3f(0.5f,  -0.5f, -0.5f),
@@ -71,12 +72,14 @@ public class BlockMeshUtil {
             
       //Zneg
             new Vector3f[] {
-                    new Vector3f(0.5f, -0.5f,  0.5f),
+        		
                     //1
                     new Vector3f(-0.5f, -0.5f,  0.5f),
                     //2
                     new Vector3f(-0.5f,  0.5f,  0.5f),
                     new Vector3f(0.5f,  0.5f,  0.5f),
+                    new Vector3f(0.5f, -0.5f,  0.5f),
+                    
                     //1 
                     
                 },
@@ -87,11 +90,12 @@ public class BlockMeshUtil {
 	private static List<Vector2f> uvs = Arrays.asList(new Vector2f(0,0),new Vector2f(0,1),new Vector2f(1,1),new Vector2f(1,0));
 	private static final int[] FaceIndices = new int[] {0,3,2, 0,2,1};
 	
-    public static void AddFaceMeshData(Coord3 pos, MeshSet mset, int direction, int triIndexStart, BlockType blockType)
+    public static void AddFaceMeshData(Coord3 pos, MeshSet mset, int direction, int triIndexStart, BlockType blockType, TerrainMap map)
     {
         FaceVertices(mset, pos, direction);
         UVsForDirection(mset, direction,blockType);
         IndicesForDirection(mset, triIndexStart);
+        AddFaceMeshLightData(pos,mset,direction,map);
     }
     
     /* ETHAN: THIS IS PERFECT! NOW CHANGE IT. 
@@ -143,4 +147,19 @@ public class BlockMeshUtil {
     		mset.vertices.add(corner);
     	}
     }
+    
+    public static void AddFaceMeshLightData(Coord3 pos, MeshSet mset, int dir, TerrainMap map){
+    	for(Vector3f ver : faceVertices[dir]){
+    		float[] color;
+    		if(ver.y<0){
+    			color = new float[]{0,0,0,0.2f};
+    		}else{
+    			color = new float[]{0,0,0,1f};
+    		}
+    		for(float c : color){
+    			mset.colors.add(c);
+    		}
+    	}
+    }
+    
 }

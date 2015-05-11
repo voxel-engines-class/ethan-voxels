@@ -14,6 +14,10 @@ public class Coord3 {
 	public Vector3f toVector3f() {
 		return new Vector3f(x,y,z);
 	}
+	public static Coord3 FromVector3f(Vector3f vec){
+		return new Coord3((int)vec.x,(int)vec.y,(int)vec.z);
+		
+	}
 	
 	public Coord3 add(Coord3 o){
 		return new Coord3(x + o.x, y + o.y, z + o.z);
