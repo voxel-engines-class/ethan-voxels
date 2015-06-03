@@ -151,13 +151,44 @@ public class BlockMeshUtil {
     public static void AddFaceMeshLightData(Coord3 pos, MeshSet mset, int dir, TerrainMap map){
     	for(Vector3f ver : faceVertices[dir]){
     		float[] color;
-    		if(ver.y<0){
-    			color = new float[]{0,0,0,0.2f};
-    		}else{
-    			color = new float[]{0,0,0,1f};
+    		int dx = (int) Math.signum(ver.x);
+    		int dy = (int) Math.signum(ver.y);
+    		int dz = (int) Math.signum(ver.z);
+    		 
+    		Coord3 a, b, c, d;
+    		// EITHER Z DIRECTION
+    		if (dir == Direction.ZNEG || dir == Direction.ZPOS) {
+	    		a = new Coord3(0, 0, dz).add(pos);
+	    		b = new Coord3(dx, 0, dz).add(pos);
+	    		c = new Coord3(0,dy,dz).add(pos);
+	    		d = new Coord3(dx,dy,dz).add(pos);
     		}
-    		for(float c : color){
-    			mset.colors.add(c);
+    		else if (dir == Direction.YNEG || dir == Direction.YPOS) {
+	    		a = new Coord3(0, dy, 0).add(pos);
+	    		b = new Coord3(0, dy, dz).add(pos);
+	    		c = new Coord3(dx,dy,0).add(pos);
+	    		d = new Coord3(dx,dy,dz).add(pos);
+    		}
+    		else  {//X sorry
+	    		a = new Coord3(dx, 0, 0).add(pos);
+	    		b = new Coord3(dx, 0, dz).add(pos);
+	    		c = new Coord3(dx,dy,0).add(pos);
+	    		d = new Coord3(dx,dy,dz).add(pos);
+    		}
+    		
+    		int steve = (map.lightlevel(a) + map.lightlevel(b) + map.lightlevel(c) + map.lightlevel(d))/4;
+    		
+    		color = new float[]{0f, 0f, 0f, (float) steve};
+    		
+    		
+    		
+//    		if(ver.y<0){
+//    			color = new float[]{0,0,0,0.2f};
+//    		}else{
+//    			color = new float[]{0,0,0,1f};
+//    		}
+    		for(float cc : color){
+    			mset.colors.add(cc);
     		}
     	}
     }

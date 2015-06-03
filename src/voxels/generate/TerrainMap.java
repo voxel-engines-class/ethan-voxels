@@ -15,6 +15,14 @@ public class TerrainMap {
     }
        // TerrainDataProvider     
     public static final int HEIGHTLIMITCHUNK = 6;
+    public int lightlevel(Coord3 global){
+    	BlockType block = createOrLookupBlockAt(global);
+    	if(block == BlockType.AIR){
+    		return 15;	
+    	}else{
+    		return 0;
+    	}
+    }
      //   public static final int WORLD_HEIGHT_CHUNKS = 4; // you can change this now or later.
     public static int worldHeightBlocks(){
     	return HEIGHTLIMITCHUNK * Chunk.YLENGTH;
